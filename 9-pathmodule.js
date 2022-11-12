@@ -6,6 +6,8 @@ console.log(path.sep);
 // works even with redudant /
 const filepath=path.join('/content//','subfolder','text.txt');
 console.log(filepath);
+const filepath2=path.join('/content','subfolder','text.txt');
+console.log(filepath2);
 
 const basename=path.basename(filepath);
 console.log(basename);
