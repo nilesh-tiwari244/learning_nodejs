@@ -1,1 +1,1 @@
-# learning node and express js via freecodecamp
+# learning node and express js from freecodecamp
