@@ -1,5 +1,5 @@
 const http= require('http');
-
+console.log("here i am");
 const ser=http.createServer((req,res)=>{
     if (req.url==='/'){
         res.end('homepage');
