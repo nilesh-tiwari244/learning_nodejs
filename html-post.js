@@ -3,31 +3,19 @@ const app = express();
 let { people } = require('./data.js'); // as we will make modifications in it
 
 // static assets
-app.use(express.static('./methods-public-post-js'))
+app.use(express.static('./methods-public-post-html'))
 // parse form data and add data to req.body
-app.use(express.urlencoded({extended:false})) // in case of html post request
+app.use(express.urlencoded({encoded:false}))
 //express.urlencoded id a builtin middleware function in Express,
 // it parses incoming requests with urlencoded payloads and is based on parser
 // its property extended allow to choose between parsing url encoded data with 
 // querystring library (if set false) or with qs library (when set to true)
-
-// parse json (in case of json post request)
-app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send("home page");
 })
 app.get('/api/people', (req, res) => {
     res.status(200).json({ success: true, data: people });
-})
-
-
-app.post('/api/people',(req,res)=>{// even though url is same its okay as methods are different
-    let {name}=req.body; // as middleware has been added
-    if (!name){
-        return res.status(400).json({success:false,msg:'please provide name'})
-    }
-    res.status(201).send({success:true,person:name}) // 201 is for successful post request
 })
 app.post('/login',(req,res)=>{
     let {name1}=req.body;

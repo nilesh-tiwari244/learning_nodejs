@@ -1,0 +1,59 @@
+<!Doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+            <div class="kindaform">
+                <h3> Traditional form</h3>
+                <div class="form-row">
+                    <label for="name"> enter name</label>
+                    <input type="text" name="name1" class="name2" autocomplete="false" />
+                </div>
+                <button type ="submit" class="block">submit</button>
+                <div class="err"></div>
+            </div>
+            <div class="result"></div>
+            <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+            <script>
+                const result=document.querySelector('.result')
+                console.log("hello");
+                
+                const fetchPeople= async ()=>{
+                    try{
+                        const {data}=await axios.get('/api/people');
+                        const people=data.data.map((person)=>{
+                            return `<h4>${person.name}</h4>`
+                        })
+                        result.innerHTML= people.join('');
+                        //result.innerHTML= people;
+                       
+                    }
+                    catch(error){
+                        result.innerHTML=`<div class="alert alert-danger">can't fetch data</div>`
+                    }
+                }
+                fetchPeople();
+               const input=document.querySelector('.name2');
+               const button=document.querySelector('.block');
+               const errblock=document.querySelector('.err');
+               button.addEventListener('click',async (e)=>{
+                console.log(errblock);
+                e.preventDefault();
+                let val=input.value;
+                console.log(val);
+                try{
+                    const {data}=await axios.post('/api/people',{name:val}); // when we perform an http request with axios we receive a giant object and here we only required our data one
+                    console.log(data);
+                    const h5=document.createElement('h5');
+                    h5.textContent=data.person;
+                    result.appendChild(h5);
+                }
+                catch(er){
+                    errblock.textContent=er.response.data.msg;
+                }
+                input.value='';
+               })
+            </script>
+    </body>
+</html>
