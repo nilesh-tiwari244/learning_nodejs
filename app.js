@@ -1,8 +1,8 @@
 // from office
 const express = require('express');
 const app = express();
-const apipeople=require('./router/apipeople');
-const apipostman=require('./router/apipostman');
+const apipeople=require('./routes/apipeople');
+const apipostman=require('./routes/apipostman');
 
 // parse json (in case of json post request)
 app.use(express.json());
@@ -25,12 +25,13 @@ app.get('/',(req,res)=>{
 })
 
 app.post('/login',(req,res)=>{
-    let {name1}=req.body;
+    let {name}=req.body;
     // here the above name will decide the variable name unlike that in html post scene where form input tag was deciding that
-    if (name1){
-        return res.status(200).send(`Welcome ${name1}`);
+    if (!name){
+        return res.status(401).json("No data is passed")
     }
-    res.status(401).send("No data is passed")
+    return res.status(200).send(`Welcome ${name}`);
+   
 })
 
 app.listen(5000, () => {
