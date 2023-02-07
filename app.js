@@ -1,15 +1,17 @@
-// from office
 const express = require('express');
 const app = express();
-const apipeople=require('./routes/apipeople');
+
+const apipeople=require('./routes/apipeople'); // these routes will contain routes starting under respective names
 const apipostman=require('./routes/apipostman');
 
 // parse json (in case of json post request)
 app.use(express.json());
+
 // static assets
 app.use(express.static('./methods-public-post-js'))
-// parse form data and add data to req.body
-app.use(express.urlencoded({extended:false})) // in case of html post request
+
+// parse form data and add data to req.body in case of html post request
+app.use(express.urlencoded({extended:false}))
 //express.urlencoded id a builtin middleware function in Express,
 // it parses incoming requests with urlencoded payloads and is based on parser
 // its property extended allow to choose between parsing url encoded data with 
@@ -31,7 +33,6 @@ app.post('/login',(req,res)=>{
         return res.status(401).json("No data is passed")
     }
     return res.status(200).send(`Welcome ${name}`);
-   
 })
 
 app.listen(5000, () => {
@@ -43,5 +44,6 @@ app.listen(5000, () => {
 
 // if frontend and backend are not on the same server then full path/domain need to be provided
 
-// also while having html type post request, in the network section an of request header the content type 
-// is application/x-www-form-urlencoded which will be different in case of js post request flavour
+// also while having html type post request, in the network section of request header the content type 
+// is application/x-www-form-urlencoded which will be different in case of js post request flavour in that case it will be
+ // application/json
