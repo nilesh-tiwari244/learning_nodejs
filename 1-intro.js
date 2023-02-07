@@ -1,6 +1,6 @@
 const a=require('./2-intro');
 require('./mindgrenade')
-const funt=require("./trialmod");
+const funt=require("./1-1trialmodule");
 funt();
 console.log(a.singleperson,a.items);
 const john = 'john'

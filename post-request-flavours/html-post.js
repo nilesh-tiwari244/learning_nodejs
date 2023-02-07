@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-let { people } = require('./data.js'); // as we will make modifications in it
+let { people } = require('../data.js'); // as we will make modifications in it
 
 // static assets
 app.use(express.static('./methods-public-post-html'))
